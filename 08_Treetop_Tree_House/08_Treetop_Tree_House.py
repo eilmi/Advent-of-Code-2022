@@ -30,38 +30,26 @@ for x in range(1,xdim-1): # running for every tree inside the forest (exluding f
 
 tree_counter+=2*xdim+2*(ydim-2) # add outer rows and columns (where all trees are visable)
 
-print(tree_counter)
-
+print("Part one: "+str(tree_counter))
 
 ### Part two ###
 
-def calc_viewing_dist(val,r1,r2,c1,c2):
-    vd_r1=0
-    vd_r2=0
-    vd_c1=0
-    vd_c2=0
-    for x in r1:
-        vd_r1+=1
-        if x>=val:
-            break
-    for x in r2:
-        vd_r2+=1
-        if x>=val:
-            break
-    for x in c1:
-        vd_c1+=1
-        if x>=val:
-            break
-    for x in c2:
-        vd_c2+=1
-        if x>=val:
-            break
-    
-    return vd_r1*vd_r2*vd_c1*vd_c2
+def calc_viewing_dist(val,array):
+    result = 1
+    for line_of_sight in array:
+        view_dist=0
+        for tree_height in line_of_sight:
+            view_dist+=1
+            if tree_height>=val:
+                break
+        result*=view_dist
+
+    return result
 
 best_score=0
+
 for x in range(1,xdim-1):
     for y in range(1,ydim-1):
-        best_score=max(calc_viewing_dist(a[x,y],np.flip(a[x,0:y]),a[x,y+1:],np.flip(a[0:x,y]),a[x+1:,y]),best_score)
+        best_score=max(calc_viewing_dist(a[x,y],[np.flip(a[x,0:y]),a[x,y+1:],np.flip(a[0:x,y]),a[x+1:,y]]),best_score)
 
-print(best_score)
+print("Part two: "+str(best_score))
