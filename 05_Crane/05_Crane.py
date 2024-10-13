@@ -47,6 +47,9 @@ for i in part_one_grid:
 
 print("Part one: "+st)
 
+
+
+### exactly the same without flipping the array ###
 part_two_grid=new_grid.copy()
 
 for command in f[last_line_of_mountain+2:]:
