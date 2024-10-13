@@ -36,13 +36,13 @@ print("Part one: "+str(tree_counter))
 
 def calc_viewing_dist(val,array):
     result = 1
-    for line_of_sight in array:
+    for line_of_sight in array: # run for all 4 directions
         view_dist=0
-        for tree_height in line_of_sight:
+        for tree_height in line_of_sight: #iterate over all trees in current direction
             view_dist+=1
-            if tree_height>=val:
+            if tree_height>=val: # if tree is too high limit of viewing distance in this direction is reached
                 break
-        result*=view_dist
+        result*=view_dist # calculate the score
 
     return result
 
@@ -50,6 +50,7 @@ best_score=0
 
 for x in range(1,xdim-1):
     for y in range(1,ydim-1):
+        # flipping is needed on top and left list because you are looking against the natural list order
         best_score=max(calc_viewing_dist(a[x,y],[np.flip(a[x,0:y]),a[x,y+1:],np.flip(a[0:x,y]),a[x+1:,y]]),best_score)
 
 print("Part two: "+str(best_score))

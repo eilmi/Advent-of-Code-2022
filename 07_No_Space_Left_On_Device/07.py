@@ -33,9 +33,9 @@ directory_tree.append([folderpath,folder_size]) # add last searched directory tr
 new_dir_tree=[]
 already_searched_dirs=[]
 for x in directory_tree:
-    if x[0] in already_searched_dirs:
+    if x[0] in already_searched_dirs: #check if path is already in new tree
         continue
-    else:
+    else: # if not add it
         already_searched_dirs.append(x[0])
         new_dir_tree.append(x)
 

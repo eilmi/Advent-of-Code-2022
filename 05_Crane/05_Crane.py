@@ -4,6 +4,8 @@ import numpy as np
 
 f = open("input.txt").readlines()
 
+
+### converting input to usable array ###
 last_line_of_mountain=0
 column=[]
 for index,line in enumerate(f):
@@ -20,15 +22,16 @@ matrix = np.char.strip(np.array(column))
 
 new_grid=[]
 
-for i in range(1,len(row),4):
-    new_array = np.delete(matrix[:,i], np.where(matrix[:,i] == ""))
-    new_grid.append(new_array   )
+for i in range(1,len(row),4): # only every 4th column contains useful data
+    new_array = np.delete(matrix[:,i], np.where(matrix[:,i] == "")) # deleting empty list entries
+    new_grid.append(new_array)
 
 
-#print(new_grid)
+### Part one ### moving the boxes one after the other
 
 part_one_grid=new_grid.copy()
-for command in f[last_line_of_mountain+2:]:
+
+for command in f[last_line_of_mountain+2:]: #run for every given command
     #print(command)
     tmp = (command.strip()).split(" ")
 
